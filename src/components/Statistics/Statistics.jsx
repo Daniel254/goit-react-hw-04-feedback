@@ -1,29 +1,35 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 
-export default class Statistics extends Component {
-  static propTypes = {
+function Statistics({ stats: { good, neutral, bad } }) {
+  const totalFeedback = good + neutral + bad;
+  const positiveFeedbackPercentage = totalFeedback
+    ? Math.floor((good / totalFeedback) * 100)
+    : 0;
+
+  return totalFeedback === 0 ? (
+    <p>There is no feedback</p>
+  ) : (
+    <p>
+      Good: {good}
+      <br />
+      Neutral: {neutral}
+      <br />
+      Bad: {bad}
+      <br />
+      Total: {totalFeedback}
+      <br />
+      Positive feedback: {positiveFeedbackPercentage}%
+      <br />
+    </p>
+  );
+}
+
+Statistics.propTypes = {
+  stats: PropTypes.shape({
     good: PropTypes.number.isRequired,
     neutral: PropTypes.number.isRequired,
     bad: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    positivePercentage: PropTypes.number.isRequired,
-  };
+  }).isRequired,
+};
 
-  render() {
-    return (
-      <p>
-        Good: {this.props.good}
-        <br />
-        Neutral: {this.props.neutral}
-        <br />
-        Bad: {this.props.bad}
-        <br />
-        Total: {this.props.total}
-        <br />
-        Positive feedback: {this.props.positivePercentage}%
-        <br />
-      </p>
-    );
-  }
-}
+export default Statistics;
