@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Section from 'components/Section/Section';
 import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
+import Section from 'components/Section/Section';
 import Statistics from 'components/Statistics/Statistics';
+import { useState } from 'react';
 
 export function App() {
   const [stats, setStats] = useState({
@@ -11,10 +11,10 @@ export function App() {
   });
 
   const clickButtonHandler = ({ target: { name: statName } }) => {
-    setStats(prev => ({
-      ...prev,
-      [statName]: prev[statName] + 1,
-    }));
+    setStats({
+      ...stats,
+      [statName]: stats[statName] + 1,
+    });
   };
 
   return (
